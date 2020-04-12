@@ -1,0 +1,159 @@
+{% extends "main/_layout.html" %}
+{% block title %} Index {% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="/static/css/action.css"/>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="bua-stats">
+        <div class="stat"> {{ "{0:.1f}".format(saving_ftes) }} Savings | FTEs </div>
+
+        <div class="stat">  {{ "{:,}".format(incomplete_count) }} Actions Pending</div>
+
+        <div class="stat"> {{ "{:,}".format(complete_count) }} Actions Completed</div>
+
+</div>
+
+<div class="content-section">
+
+
+      <fieldset class="form-group">
+        <body>
+          <h4>Goals & Actions</h4>
+
+          <div class="form-group">
+                <form action="{{ url_for('todo.add') }}" method="POST">
+
+
+                    <input placeholder="Write a Goal" name="todoitem">
+                    <input placeholder="Time save| In Min." name="savingitem">
+                    <input placeholder="Affected Volumes" name="affected_volume">
+
+
+                    <p type="submit" class="btn btn-info btn-sm m-1" value="Add Item">
+                        <button type="submit" scope="col" class="btn btn-info btn-sm m-1"> Add Goal</button>
+
+                </form>
+          </div>
+
+          <div class="Incomplete">
+              <hr>
+              <h4>Incomplete Goals</h4>
+              <table class="table table-sm table-condensed table-striped">
+                  <thead>
+                  <tr>
+                      <th class="tdgoal" scope="col">Goal-Description</th>
+                      <th class="tdgoal" scope="col">Saving</th>
+                      <th class="tdgoal" scope="col">Volume Affected</th>
+                      <th scope="col">Actions</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <ul>
+                      {% for todo in incomplete %}
+                          <tr id={{ todo.id }}>
+                          <td class="tdgoal" scope="col"><a style="font-size: 10pt">{{ todo.goal }}</a></td>
+                          <td class="tdgoal" scope="col"><a style="font-size: 10pt">{{ todo.saving }}</a></td>
+                          <td class="tdgoal" scope="col"><a style="font-size: 10pt">{{ todo.affected_volume }}</a></td>
+
+                          <td scope="col"><a style="font-size: 7pt; color:white" type="button" class="btn btn-success btn-sm m-1" href="{{ url_for('todo.complete', id=todo.id) }}">Complete</a>
+
+                          <td scope="col"> <button style="font-size: 7pt; type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+                              <!-- Modal -->
+
+                              <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Task?</h5>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a href="{{ url_for('todo.delete_goal', id=todo.id) }}" method="POST">
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                      {% endfor %}
+                  </ul>
+                  </tbody>
+
+              </table>
+          </div>
+
+
+          <div class="Incomplete">
+          <hr>
+              <h4>Completed Goals</h4>
+              <table class="table table-sm table-condensed table-striped">
+                  <thead>
+                  <tr>
+                      <th class="tdgoal" scope="col">Goal-Description</th>
+                      <th class="tdgoal" scope="col">Saving</th>
+                      <th class="tdgoal" scope="col">Volume Affected</th>
+                      <th scope="col">Actions</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <ul>
+                      {% for todo in complete %}
+                          <tr id={{ todo.id }}>
+                          <td class="tdgoal" scope="col"><a style="font-size: 10pt">{{ todo.goal }}</a></td>
+                          <td class="tdgoal" scope="col"><a style="font-size: 10pt">{{ todo.saving }}</a></td>
+                          <td class="tdgoal" scope="col"><a style="font-size: 10pt">{{ todo.affected_volume }}</a></td>
+
+                          <td scope="col"><a style="font-size: 7pt; color:white" type="button" class="btn btn-secondary btn-sm m-1" href="{{ url_for('todo.incomplete', id=todo.id) }}">Incomplete</a>
+
+                          <td scope="col"> <button style="font-size: 7pt; type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+                              <!-- Modal -->
+
+                              <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Task?</h5>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a href="{{ url_for('todo.delete_goal', id=todo.id) }}" method="POST">
+                                           <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                      {% endfor %}
+                  </ul>
+                  </tbody>
+
+              </table>
+          </div>
+
+        </body>
+      </fieldset>
+</div>
+
+
+
+
+{% endblock content %}

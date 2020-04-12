@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+      <title>Bottoms Up Analysis - {{ title }}</title>
+    {% else %}
+      <title>Bottoms Up Analysis</title>
+    {% endif %}
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic|Source+Code+Pro:500">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/css/nav.css"/>
+    {% block additional_css %}{% endblock %}
+</head>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <div class="container home-main">
+        <a class="navbar-brand mr-4" href="{{ url_for('main.home') }}">Bottoms Up Analysis</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-titles">
+              {% if current_user.is_authenticated %}
+                  {% if current_user.role == "user" %}
+                      <a class="nav-item nav-link" href="{{ url_for('tasks.new_task') }}">New</a>
+                      <a class="nav-item nav-link" href="{{ url_for('main.all_squad') }}">All Squads</a>
+
+                      <a class="nav-item nav-link" href="{{ url_for('squads.account') }}">Squad Info</a>
+                      <a class="nav-item nav-link" href="{{ url_for('squads.logout') }}">Logout</a>
+                     {% endif %}
+
+                  {% if current_user.role == "admin" %}
+                      <a class="nav-item nav-link" href="{{ url_for('admin.index') }}">Admin</a>
+                      <a class="nav-item nav-link" href="{{ url_for('squads.account') }}">Info</a>
+                      <a class="nav-item nav-link" href="{{ url_for('squads.logout') }}">Logout</a>
+                  {% endif %}
+
+              {% else %}
+                  <a class="nav-item nav-link" href="{{ url_for('squads.login') }}">Login</a>
+                  <a class="nav-item nav-link" href="{{ url_for('squads.register') }}">Register</a>
+              {% endif %}
+          </div>
+      </div>
+</nav>
+
+<div class="message">
+<div class="col-md-12">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+ </div>
+
+{% block content %}{% endblock %}
+
+ <footer>
+        This is a site built for Services Analysis.
+        <br>It's meant to model and understand task and activities for our teams and squads
+        <br> To understand more about workforce management
+        <br>please review our
+        <a href="{{ url_for('main.about') }}">About Page</a>.
+ </footer>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+{% block additional_js %}{% endblock %}
+
+</body>
+</html>

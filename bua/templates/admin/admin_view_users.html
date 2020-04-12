@@ -1,0 +1,32 @@
+{% extends 'admin/master.html' %}
+
+{% block title %}Admin: All Users{% endblock %}
+
+{% block content %}
+
+
+
+<table class="table table-stripe">
+  <thead>
+    <tr>
+      <th class="border-top-0">User ID</th>
+      <th class="border-top-0">Email</th>
+      <th class="border-top-0">Role</th>
+
+      </tr>
+  </thead>
+  <tbody>
+    {% for squad in squads %}
+      <tr>
+        <td> {{ squad.id }} </td>
+        <td> {{ squad.email }} </td>
+        <td> {{ squad.role }} </td>
+
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% endblock %}

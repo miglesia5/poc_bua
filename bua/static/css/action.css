@@ -1,0 +1,64 @@
+.content-section {
+    margin-top: 50px;
+    margin-left: 15px;
+    max-width: 900px;
+
+
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+.content-section .form-group {
+    font-family: Consolas, "andale mono", "lucida console", monospace;
+}
+
+.bua-stats {
+        padding: 10px 5px;
+        background: #ececec;
+        text-align: center;
+        border-bottom: 1px solid #d3d3de;
+        border-top: 1px solid #d3d3de;
+        margin-bottom: 1px;
+}
+
+.bua-stats .stat {
+        display: inline-block;
+        min-width: 170px;
+        padding: 10px;
+        font-size: 16px;
+        color: #003d61;
+}
+
+.content-section input {
+    margin-top: 50px;
+    margin-left: 15px;
+    max-width: 900px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+
+.Incomplete th {
+    padding: 25px;
+}
+
+.Incomplete .form-table .tdgoal {
+    margin-top: 50px;
+    margin-left: 15px;
+    width: 700px;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.Incomplete td {
+    padding: 20px;
+}
+
+
+

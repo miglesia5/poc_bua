@@ -1,0 +1,131 @@
+{% extends "main/_layout.html" %}
+{% block title %} Details {% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="/static/css/details.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="details">
+        <div class="content-details">
+            <div class="hero">
+                <div class="col-sm-8">
+                    <div class="install sub-hero">
+                        Product:
+                        {{ task.product }}
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="col-sm-1"></div>
+            <b>General Task Perform:</b>
+            <a href="#" class="stats">{{ task.activity }}</a>
+            <div class="col-sm-10">
+
+            </div>
+        </div>
+
+        <div class="project-list container">
+            <div class="row">
+                <div class="col-sm-3 nav-sidebar-section">
+
+
+                    <h4> Details: </h4>
+                    <h3>Training & Recording Links</h3>
+                    <a href="https://ibm.ent.box.com/folder/61045950947">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        Link
+                    </a>
+                    <hr>
+
+                    <h3>Statistics</h3>
+                    <p></p>
+                     <h6> Monthly Volume: {{ task.volume }}</h6>
+                    <h6> Time per Transaction: {{ task.avg_time }} min.</h6>
+                    <p></p>
+
+                    <h6> Total FTEs for Annual Activity: <prep> {{ "{0:.1f}".format(ftes) }} </prep></h6>
+                    <p></p>
+                    <hr>
+
+                    <div>
+                        <h3> Support </h3>
+                        <h6>Tools: {{ task.tool }}</h6>
+
+                    </div>
+                    <hr>
+
+                    <h3>Known Pain Points</h3>
+                    <div class="Details">
+                        <h6> Pain Time per Transaction:</h6>
+                        <h5> {{ (waste_time) }} min. per transaction</h5>
+                    </div>
+                    <hr>
+
+                </div>
+
+                <div class="col-sm-7">
+
+                    <h2>Activity description</h2>
+
+                    <pre>Summary | Detail Description of the Activity</pre>
+                    <p class="summary">
+                       {{ task.summary }}
+                    </p>
+
+                    <div class="btn1">
+                         <div class="buttons">
+                        <td scope="col"> <a class="btn btn-secondary btn-sm mt-1 mb-1" href="/task/{{ task.id }}/update">Edit</a> </td>
+                        <td scope="col"> <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+                        <!-- Modal -->
+
+                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Task?</h5>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                       <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="POST">
+
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm-1"></div>
+
+                <div class="opportunity">
+                    <h3>Feedback: </h3>
+                    <p><h6>{{ task.pain_point }}</h6> </p>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+{% endblock %}

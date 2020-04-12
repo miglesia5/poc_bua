@@ -1,0 +1,83 @@
+{% extends "main/_layout.html" %}
+{% block additional_css %}
+<link rel="stylesheet" href="/static/css/home.css"/>
+<link rel="stylesheet" href="/static/css/your_squad.css"/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="details">
+        <div class="content-details">
+            <div class="hero">
+                <div class="col-sm-8">
+                    <div class="install sub-hero">
+                        <div class="hero-inner">
+                        <h1> Task For: {{ squad.squadname }} </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bua-stats">
+
+        <div class="stat"> Activities: {{ "{:,}".format(activity_count) }} </div>
+
+        <div class="stat"> Current Workloads: {{ "{0:.1f}".format(squad_ftes) }} <small>FTEs</small>  </div>
+
+
+        <div class="stat"> Standard Activities: {{ "{0:.1f}".format(standard_ftes)}} <small>FTEs</small>  </div>
+
+
+
+
+
+    </div>
+
+    <div class="content-section">
+        <h2> Tasks Overview</h2>
+
+
+        <div class="table-responsive">
+            <table class="table table-sm table-condensed table-striped" id="activities">
+            <thead>
+                <tr>
+                    <th scope="col">Activity</th>
+                    <th scope="col">Tool</th>
+                    <th scope="col">Volume per Month</th>
+                    <th scope="col">Min per Transaction</th>
+                    <th scope="col">Feedback</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for t in tasks %}
+                <tr id={{ t.id }}>
+                    <td scope="col"> {{ t.activity }}</td>
+                    <td scope="col"> {{ t.tool }} </td>
+                    <td scope="col"> {{ t.volume }} </td>
+                    <td scope="col"> {{ t.avg_time }} </td>
+                    <td scope="col"> {{ t.pain_point }} </td>
+
+                    <div class="buttons">
+                        <td scope="col"> <a class="btn btn-secondary btn-sm m-1" href="/task/{{ t.id }}">Detail</a> </td>
+
+                    </div>
+                </tr>
+            {% endfor %}
+            <div class="todo">
+            </tbody>
+        </table>
+                     <td scope="col"> <a class="btn btn-success btn-sm m-1" href="{{ url_for('todo.to_do') }}">Actions & Savings </a></td>
+
+        </div>
+
+    </div>
+
+
+
+
+{% endblock content %}

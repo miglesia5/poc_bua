@@ -1,0 +1,44 @@
+{% extends "main/_layout.html" %}
+{% block title %} Index {% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="/static/css/home.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="hero">
+        <div class="hero-inner">
+           <h1> Retrieve any activities & workloads </h1>
+        </div>
+        or <a href="{{ url_for('main.about') }}">Find More About Bottoms Up Analysis</a>
+    </div>
+
+    {% if current_user.is_authenticated %}
+
+    <div class="squads-list">
+        <div class="row">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-7">
+                <h2> Squads List</h2>
+                {% for squad in squads %}
+
+                    <article class="media content-section">
+                        <div class="media-body">
+                            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + squad.image_file) }}">
+                             <a class="mr-2" href="{{ url_for('squads.squad_detail', squadname=squad.squadname) }}">{{ squad.squadname }} </a>
+
+                            <p> Members = {{ squad.squad_members }}</p>
+                            <div class="article-metadata">
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+
+            </div>
+        </div>
+   </div>
+    {% endif %}
+
+
+
+{% endblock content %}

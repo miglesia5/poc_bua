@@ -1,0 +1,34 @@
+.navbar-titles {
+    margin-left: auto;
+}
+
+nav {
+    height: 41px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+}
+
+.navbar-titles a {
+    display: inline-block;
+    font-size: 17px;
+    color: white;
+}
+
+
+footer {
+        margin-left: 0px;
+        padding: 50px;
+        text-align: center;
+        color: white;
+        background: rgba(0, 0, 0, 0.85);
+}
+
+footer a {
+        color: #2495f2;
+}
+
+.message {
+    margin-top: 40px;
+
+}
+

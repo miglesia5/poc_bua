@@ -1,0 +1,284 @@
+{% extends "main/share/../main/_layout.html" %}
+{% block title %} Index {% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="/static/css/account.css"/>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="bua-stats">
+        <div class="stat"> {{ "{0:.1f}".format(saving_ftes) }} Total Savings</div>
+
+        <div class="stat"> {{ "{:,}".format(incomplete_count) }} Actions Pending</div>
+
+        <div class="stat"> {{ "{:,}".format(complete_count) }} Actions Completed</div>
+
+</div>
+
+<div class="form-group2">
+    <div class="col-sm-12 nav-sidebar-section">
+        <div> <h4>Create an Action</h4>  </div>
+
+        <div class="form-group">
+            {{ form.goal.label(class="form-control-label") }}
+            {% if form.goal.errors %}
+                {{ form.goal(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.goal.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.goal(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.saving.label(class="form-control-label") }}
+            {% if form.saving.errors %}
+                {{ form.saving(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.saving.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.saving(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </div>
+
+ <div class="content-section2">
+  <div class="col-sm-12 nav-sidebar-section">
+     <div> <h4>Create an Action</h4>  </div>
+    <form action="{{ url_for('todo.add') }}" method="POST">
+        <input type="text" class="form-control-label-1" placeholder="Write a New Goal" name="goal_item">
+        <input type="text" class="form-control-label-2" placeholder="Target savings Hours per Month" name="saving_item">
+        <input type="submit" class="btn btn-info btn-sm m-1" value="Add Action">
+    </form>
+  </div>
+
+ </div>
+
+  <div class="content-section2">
+      <div class="col-sm-12 nav-sidebar-section">
+          <div class="table-responsive">
+              <h4>Pending Actions</h4>
+              <table class="table" id="activities">
+                  <thead>
+                  <tr>
+                      <th scope="col">Action</th>
+                      <th scope="col">Projected Savings</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for todo in incomplete %}
+                      <tr id={{ todo.id }}>
+                          <td scope="col"> {{ todo.goal }}</td>
+                          <td scope="col"> {{ todo.saving }} </td>
+
+                          <div class="button">
+                              <td scope="col"> <a class="btn btn-success btn-sm m-1" href="{{ url_for('todo.complete', id=todo.id) }}">Mark Complete</a> </td>
+
+                              <td scope="col"> <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+                              <!-- Modal -->
+
+                              <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Task?</h5>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <form action="{{ url_for('todo.delete_goal', id=id) }}" method="POST">
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                          </div>
+                      </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+           </div>
+      </div>
+  </div>
+
+  <div class="content-section2">
+      <div class="col-sm-12 nav-sidebar-section">
+          <div class="table-responsive">
+              <h4>Completed Actions</h4>
+              <table class="table" id="activities">
+                  <thead>
+                  <tr>
+                      <th scope="col">Completed Action</th>
+                      <th scope="col">Savings Achieved | Hours per Month</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for todo in complete %}
+                      <tr id={{ todo.id }}>
+                          <td scope="col"> {{ todo.goal }}</td>
+                          <td scope="col"> {{ todo.saving }} </td>
+
+                          <div class="button">
+                              <td scope="col"> <a class="btn btn-danger btn-sm m-1" href="{{ url_for('todo.incomplete', id=todo.id) }}">Mark Incomplete</a> </td>
+                          </div>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+
+
+ <div class="content-section2">
+      <div class="col-sm-12 nav-sidebar-section">
+          <div class="table-responsive">
+              <h4>Pending Actions</h4>
+              <table class="table" id="activities">
+                  <thead>
+                  <tr>
+                      <th scope="col">Action</th>
+                      <th scope="col">Projected Savings</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for todo in incomplete %}
+                      <tr id={{ todo.id }}>
+                          <td scope="col"> {{ todo.goal }}</td>
+                          <td scope="col"> {{ todo.saving }} </td>
+
+                          <div class="button">
+                              <td scope="col"> <a class="btn btn-success btn-sm m-1" href="{{ url_for('todo.complete', id=todo.id) }}">Mark Complete</a> </td>
+
+                              <td scope="col"> <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+                              <!-- Modal -->
+
+                              <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Task?</h5>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <form action="{{ url_for('todo.delete_goal', id=id) }}" method="POST">
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                          </div>
+                      </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+           </div>
+      </div>
+  </div>
+
+  <div class="content-section2">
+      <div class="col-sm-12 nav-sidebar-section">
+          <div class="table-responsive">
+              <h4>Completed Actions</h4>
+              <table class="table" id="activities">
+                  <thead>
+                  <tr>
+                      <th scope="col">Completed Action</th>
+                      <th scope="col">Savings Achieved | Hours per Month</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for todo in complete %}
+                      <tr id={{ todo.id }}>
+                          <td scope="col"> {{ todo.goal }}</td>
+                          <td scope="col"> {{ todo.saving }} </td>
+
+                          <div class="button">
+                              <td scope="col"> <a class="btn btn-danger btn-sm m-1" href="{{ url_for('todo.incomplete', id=todo.id) }}">Mark Incomplete</a> </td>
+                          </div>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+
+
+
+
+    <div>.</div>
+
+    <div>.</div>
+
+<div class="activities-list">
+        <div class="row">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-7">
+                <h2> Newest Activities</h2>
+                <div class="subtitle">
+                    List of Latest Activities and Tasks
+                </div>
+
+                {% for task in tasks.items %}
+                    <article class="media content-section">
+                        <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + task.author.image_file) }}">
+                        <div class="media-body">
+                            <div class="article-metadata">
+                                <a class="mr-2" href="{{ url_for('squads.user_tasks', squadname=task.author.squadname) }}">{{ task.author.squadname }}</a>
+                                <small class="text-muted">{{ task.date_posted.strftime('%y-%m-%d') }}</small>
+                            </div>
+                            <h2><a class="article-title" href="{{ url_for('tasks.task', task_id=task.id) }}">{{ task.product }}</a></h2>
+                            <p class="article-content">{{ task.activity }}</p>
+                        </div>
+                    </article>
+                {% endfor %}
+
+                {% for page_num in tasks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+                    {% if page_num %}
+                        {% if tasks.page == page_num %}
+                            <a class="btn btn-info mb-4" href="{{ url_for('main.home', task=page_num) }}">{{ page_num }}</a>
+                        {% else %}
+                            <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', task=page_num) }}">{{ page_num }}</a>
+                        {% endif %}
+                        ...
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+   </div>
+
+
+{% endblock content %}

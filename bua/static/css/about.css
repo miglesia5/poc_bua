@@ -1,0 +1,78 @@
+.purpose {
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 50px 0px;
+    text-align: center;
+}
+.purpose h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    margin-top: 50px;
+}
+
+.purpose p {
+    text-align: center;
+    margin-left: 10px;
+    font-size: 14px;
+    font-family: Consolas, "andale mono", "lucida console", monospace;
+}
+
+
+.form-container {
+    display: inline-block;
+    max-width: 450px;
+}
+
+form.account-form > * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+form.account-form h1 {
+    text-align: center;
+}
+form.account-form button {
+    float: right;
+}
+
+form.account-form {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-left: 60px;
+    margin-right: auto;
+    max-width: 450px;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+form.account-form small{
+    font-family: Consolas, "andale mono", "lucida console", monospace;
+    font-size: 10px;
+}
+
+h1 {
+    font-family: Consolas, "andale mono", "lucida console", monospace;
+    font-size: 25px;
+}
+
+.activities-list {
+
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+td {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: Consolas, "andale mono", "lucida console", monospace;
+    font-size: 9px;
+}

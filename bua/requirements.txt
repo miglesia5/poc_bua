@@ -1,0 +1,16 @@
+werkzeug
+flask
+sqlalchemy
+python-dateutil
+passlib
+flask_sqlalchemy
+flask_bcrypt
+
+flask_login
+flask_mail
+
+
+pillow
+
+
+
