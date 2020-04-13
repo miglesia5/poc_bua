@@ -1,7 +1,7 @@
 # bottoms_up_analysis
 
 
-Simple App to add and evaluate our resources and activities
+Simple App to add and evaluate team resources, activities in full time employees. 
 
 The Flask blog app is only a proof of concept that provides the team with the following Capabilities, the data driven application offers views and an SQL Data base to track and store team activites.
 
