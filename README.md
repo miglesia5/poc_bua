@@ -22,4 +22,6 @@ The Flask blog app is only a proof of concept that provides the team with the fo
 
     Bug FTEs Sum
     Scale to Mongo DB
-    Open API ports to consume information from Blue Pages, or WFM.
+    Open API ports to consume information 
+    dockerize
+    search activity tab
