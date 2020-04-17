@@ -1,16 +1,14 @@
-from alpine:latest
+# Use the Python3.7.2 image
+FROM python:3.7.2-stretch
 
-RUN apk add --no-cache python3-dev \
-    && pip3 install --upgrade pip
-
+# Set the working directory to /app
 WORKDIR /app
 
-COPY . /app
+# Copy the current directory contents into the container at /app
+ADD . /app
 
-RUN pip3 --no-cache-dir install -r requirements.txt
+# Install the dependencies
+RUN pip install -r requirements.txt
 
-EXPOSE 5000
-
-ENTRYPOINT ["python3"]
-CMD ["app.py"]
-
+# run the command to start uWSGI
+CMD ["uwsgi", "app.ini"]
