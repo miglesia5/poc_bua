@@ -9,7 +9,7 @@ flask_bcrypt
 flask_login
 flask_mail
 
-
+uwsgi
 pillow
 
 
